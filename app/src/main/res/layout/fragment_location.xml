@@ -6,55 +6,57 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     tools:context="com.shituocheng.sweather.com.sweather.ui.fragment.AboutFragment">
 
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/location_imageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            />
-        <TextView
-            android:id="@+id/tempTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="30℃"
-            android:textColor="#ffffff"
-            android:textSize="100sp"
-            android:textAlignment="center"/>
+            android:layout_height="210dp"
+            android:scaleType="fitXY" />
 
         <TextView
-            android:id="@+id/stateTextView"
-            android:layout_width="match_parent"
+            android:id="@+id/tempTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="多云转晴"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:layout_below="@+id/tempTextView"
+            android:paddingLeft="50dp"
+            android:paddingTop="210dp"
+            android:text="30"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="100sp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:id="@+id/updateTextView"
-            android:text="最后更新:2017-02-22 15:51"
-            android:paddingRight="16dp"
-            android:textColor="#ffffff"
-            android:textAlignment="textEnd"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:layout_below="@+id/stateTextView"/>
+            android:text="℃"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="220dp"
+            android:textSize="30sp"
+            android:layout_toRightOf="@id/tempTextView"/>
+
+        <TextView
+            android:id="@+id/cityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tempTextView"
+            android:layout_alignBottom="@+id/tempTextView"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:text="北京 中国"
+            android:textColor="@color/colorPrimaryDark" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/cardViewLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="350dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
@@ -64,16 +66,27 @@
             card_view:cardCornerRadius="3dp"
             card_view:cardElevation="4dp"
             card_view:cardUseCompatPadding="true"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
 
-            <ScrollView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <android.support.design.widget.TabLayout
+                    app:tabTextColor="@color/colorPrimaryDark"
+                    android:id="@+id/tabBarLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
+                <android.support.v4.view.ViewPager
+                    android:layout_below="@id/tabBarLayout"
+                    android:id="@+id/innerViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-
-            </ScrollView>
+            </RelativeLayout>
 
         </android.support.v7.widget.CardView>
 

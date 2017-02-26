@@ -8,6 +8,8 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
+import com.shituocheng.sweather.com.sweather.R;
+
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -70,21 +72,50 @@ public class Utils {
 
     //网络出错弹窗
 
-    public static void networkError(Context context){
+    public static AlertDialog networkError(Context context){
 
         final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
 
-        alertBuilder.setTitle("连接出错了哦")
-                .setMessage("网络连接异常")
-                .setPositiveButton("朕知道了", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+        AlertDialog alertDialog = alertBuilder.setTitle("连接出错了哦")
+                                              .setMessage("网络连接异常")
+                                              .setPositiveButton("朕知道了", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                        dialogInterface.dismiss();
-                    }
-                })
-                .create();
+                                                            dialogInterface.dismiss();
+                                                    }
+                                                })
+                                                .create();
 
+        return alertDialog;
+    }
+
+    public static String tempUnit(){
+
+        return "℃";
+    }
+
+//    public static int compareWeatherBackground(int code){
+//
+//        if (code == )
+//    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null && info.isConnected())
+            {
+                // 当前网络是连接的
+                if (info.getState() == NetworkInfo.State.CONNECTED)
+                {
+                    // 当前所连接的网络可用
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     

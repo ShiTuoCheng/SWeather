@@ -22,17 +22,12 @@ public class MainActivity extends BaseActivity {
 
     private ViewPager viewPager;
     private MenuItem prevMenuItem;
-    private List<String> mainTitleList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(bindLayout());
         initView();
-
-        String ipStr = Utils.getIPAddress(this.getApplicationContext());
-
-        Log.d("IP", ipStr);
     }
 
     //绑定布局
@@ -44,16 +39,6 @@ public class MainActivity extends BaseActivity {
     //初始化view
     @Override
     public void initView() {
-
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setTitle(R.string.title_my_location);
-
-        mainTitleList.add(getResources().getString(R.string.title_my_location));
-        mainTitleList.add(getResources().getString(R.string.title_places));
-        mainTitleList.add(getResources().getString(R.string.title_about));
-
 
         final BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 
@@ -68,18 +53,12 @@ public class MainActivity extends BaseActivity {
                     case R.id.navigation_home:
 
                         viewPager.setCurrentItem(0);
-
-                        getSupportActionBar().setTitle(R.string.title_my_location);
                         return true;
                     case R.id.navigation_dashboard:
                         viewPager.setCurrentItem(1);
-
-                        getSupportActionBar().setTitle(R.string.title_places);
                         return true;
                     case R.id.navigation_notifications:
                         viewPager.setCurrentItem(2);
-
-                        getSupportActionBar().setTitle(R.string.title_about);
 
                         return true;
                 }
@@ -108,8 +87,6 @@ public class MainActivity extends BaseActivity {
                 if (position == 0){
                     // TODO: 2017/2/23
                 }
-
-                getSupportActionBar().setTitle(mainTitleList.get(position));
             }
 
             @Override
