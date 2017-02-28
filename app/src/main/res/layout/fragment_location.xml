@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="50dp"
             android:paddingTop="210dp"
-            android:text="30"
+            android:text="@string/title_na"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="100sp"
@@ -48,49 +48,67 @@
             android:layout_alignBottom="@+id/tempTextView"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
-            android:text="北京 中国"
+            android:text="@string/title_na"
             android:textColor="@color/colorPrimaryDark" />
+
+        <ImageView
+            android:id="@+id/weatherStateImageView"
+            android:layout_above="@id/cityTextView"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/cardViewLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true">
 
-        <android.support.v7.widget.CardView
+        <RelativeLayout
+            android:id="@+id/cardViewLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            card_view:cardCornerRadius="3dp"
-            card_view:cardElevation="4dp"
-            card_view:cardUseCompatPadding="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
+            android:layout_marginTop="350dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
-            <RelativeLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="1000dp"
+                card_view:cardCornerRadius="3dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
 
-                <android.support.design.widget.TabLayout
-                    app:tabTextColor="@color/colorPrimaryDark"
-                    android:id="@+id/tabBarLayout"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent">
 
-                <android.support.v4.view.ViewPager
-                    android:layout_below="@id/tabBarLayout"
-                    android:id="@+id/innerViewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    <android.support.design.widget.TabLayout
+                        app:tabTextColor="@color/colorPrimaryDark"
+                        android:id="@+id/tabBarLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-            </RelativeLayout>
+                    <android.support.v4.view.ViewPager
+                        android:layout_below="@id/tabBarLayout"
+                        android:id="@+id/innerViewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-        </android.support.v7.widget.CardView>
+                </RelativeLayout>
 
-    </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 
 </FrameLayout>

@@ -31,6 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -43,9 +45,12 @@ public class LocationFragment extends BaseFragment {
     private ImageView imageView;
     private ViewPager innerViewPager;
 
+    private List<Weather> weathers = new ArrayList<>();
+
     //ui
     private TextView tempTextView;
     private TextView cityTextView;
+    private ImageView weatherStateImageView;
 
     private RelativeLayout cardViewLayout;
     private static final Interpolator INTERPOLATOR = new DecelerateInterpolator();
@@ -55,9 +60,11 @@ public class LocationFragment extends BaseFragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(bindLayout(), container, false);
+
+        uiHandler = new Handler(Looper.getMainLooper());
         initView(v);
 
-        Glide.with(getActivity().getApplicationContext()).load(R.drawable.sun).diskCacheStrategy(DiskCacheStrategy.NONE).into(imageView);
+        Glide.with(getActivity().getApplicationContext()).load(R.drawable.sun_index).diskCacheStrategy(DiskCacheStrategy.NONE).into(imageView);
 
         if (!Utils.isNetworkAvailable(getActivity().getApplicationContext())){
 
@@ -67,6 +74,8 @@ public class LocationFragment extends BaseFragment {
         }else {
 
             fetchData();
+
+            dataTabBar();
         }
         return v;
     }
@@ -80,21 +89,17 @@ public class LocationFragment extends BaseFragment {
         innerViewPager = (ViewPager)view.findViewById(R.id.innerViewPager);
         tempTextView = (TextView)view.findViewById(R.id.tempTextView);
         cityTextView = (TextView)view.findViewById(R.id.cityTextView);
+        weatherStateImageView = (ImageView)view.findViewById(R.id.weatherStateImageView);
 
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getChildFragmentManager());
 
-        mainViewPagerAdapter.addFragment(new AboutFragment());
+        mainViewPagerAdapter.addFragment(new WeatherTodayFragment());
         mainViewPagerAdapter.addFragment(new AboutFragment());
         mainViewPagerAdapter.addFragment(new AboutFragment());
 
         innerViewPager.setAdapter(mainViewPagerAdapter);
 
-        tabLayout.addTab(tabLayout.newTab().setText("今天"));
-        tabLayout.addTab(tabLayout.newTab().setText("明天"));
-        tabLayout.addTab(tabLayout.newTab().setText("后天"));
-
         tabLayout.setupWithViewPager(innerViewPager);
-
 
         innerViewPager.setOffscreenPageLimit(tabLayout.getTabCount() * 10);
 
@@ -147,13 +152,92 @@ public class LocationFragment extends BaseFragment {
         return R.layout.fragment_location;
     }
 
+    //抓取数据设定tabbar样式
+    private void dataTabBar() {
+
+        String ipStr = Utils.getIPAddress(getActivity().getApplicationContext());
+
+        String url = API.baseUrl + "forecast?" + "city=" + ipStr + "&key=" + API.appKey;
+
+        try {
+
+            //主线程
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().url(url).build();
+            client.newCall(request).enqueue(new okhttp3.Callback() {
+                @Override
+                public void onFailure(okhttp3.Call call, IOException e) {
+
+                    Looper.prepare();
+
+                    Utils.networkError(getActivity().getApplicationContext());
+
+                }
+
+                @Override
+                public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+
+                    // 注：该回调是子线程，非主线程
+                    String json = response.body().string();
+
+                    try {
+
+                        //Builder模式创造weather 构造器;
+                        Weather.Builder builder = new Weather.Builder();
+
+                        JSONObject jsonObject = new JSONObject(json);
+                        JSONArray heWeather = jsonObject.getJSONArray("HeWeather5");
+                        JSONObject weatherObj = heWeather.getJSONObject(0);
+                        JSONArray forecastJsonArray = weatherObj.getJSONArray("daily_forecast");
+
+
+                        for (int i = 0; i < 3; i++){
+
+                            JSONObject jsonObj = forecastJsonArray.getJSONObject(i);
+                            JSONObject condJsonObj = jsonObj.getJSONObject("cond");
+                            JSONObject tempJsonObj = jsonObj.getJSONObject("tmp");
+                            String code = condJsonObj.getString("code_d");
+                            String tempMax = tempJsonObj.getString("max");
+                            String minMax = tempJsonObj.getString("min");
+
+                            Weather weather = builder.weatherCode(code).maxTemp(tempMax).minTemp(minMax).build();
+
+                            weathers.add(weather);
+                        }
+
+                        //切换到主线程
+
+                        uiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                for (int i = 0; i < 3; i++){
+
+                                    String tempRange = weathers.get(i).getMinTemp() + Utils.tempUnit() + "~" + weathers.get(i).getMaxTemp() + Utils.tempUnit();
+
+                                    tabLayout.getTabAt(i)
+                                            .setText(tempRange);
+//                                            .setIcon(Utils.compareWeatherBackground(Integer.valueOf(weathers.get(i).getWeatherCode())));
+                                }
+                            }
+                        });
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //抓去天气数据
     private void fetchData(){
 
         String ipStr = Utils.getIPAddress(getActivity().getApplicationContext());
 
         String url = API.baseUrl + "now?" + "city=" + ipStr + "&key=" + API.appKey;
-
-        Log.d("URL", url);
 
         try {
             //主线程
@@ -195,21 +279,22 @@ public class LocationFragment extends BaseFragment {
                         String country = basicJsonObj.getString("cnty");
                         String temp = nowJsonObj.getString("tmp");
                         String weatherState = condJsonObj.getString("txt");
+                        String weatherCode = condJsonObj.getString("code");
                         String updateTime = updateJsonObj.getString("loc");
 
-                        weather = builder.city(city).country(country).temperature(temp).weatherState(weatherState).weatherUpdate(updateTime).build();
+                        weather = builder.city(city).country(country).temperature(temp).weatherState(weatherState).weatherUpdate(updateTime).weatherCode(weatherCode).build();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-                    uiHandler = new Handler(Looper.getMainLooper());
 
                     //Handler切换至主线程
                     uiHandler.post(new Runnable() {
                         @Override
                         public void run() {
 
+
+                            weatherStateImageView.setImageResource(Utils.compareWeatherBackground(Integer.valueOf(weather.getWeatherCode())));
                             tempTextView.setText(weather.getTemperature());
                             cityTextView.setText(weather.getCity());
                             cardViewAnimation();

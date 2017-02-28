@@ -24,6 +24,10 @@ public class Weather {
 
     private String weatherUpdate;
 
+    private String maxTemp;
+
+    private String minTemp;
+
     private Weather(Builder builder) {
         setCity(builder.city);
         setWeatherCode(builder.weatherCode);
@@ -34,15 +38,10 @@ public class Weather {
         setWindType(builder.windType);
         setFeelingTemp(builder.feelingTemp);
         setWeatherUpdate(builder.weatherUpdate);
+        setMaxTemp(builder.maxTemp);
+        setMinTemp(builder.minTemp);
     }
 
-    public String getWeatherUpdate() {
-        return weatherUpdate;
-    }
-
-    public void setWeatherUpdate(String weaatherUpdate) {
-        this.weatherUpdate = weaatherUpdate;
-    }
 
     public String getCity() {
         return city;
@@ -108,6 +107,29 @@ public class Weather {
         this.feelingTemp = feelingTemp;
     }
 
+    public String getWeatherUpdate() {
+        return weatherUpdate;
+    }
+
+    public void setWeatherUpdate(String weatherUpdate) {
+        this.weatherUpdate = weatherUpdate;
+    }
+
+    public String getMaxTemp() {
+        return maxTemp;
+    }
+
+    public void setMaxTemp(String maxTemp) {
+        this.maxTemp = maxTemp;
+    }
+
+    public String getMinTemp() {
+        return minTemp;
+    }
+
+    public void setMinTemp(String minTemp) {
+        this.minTemp = minTemp;
+    }
 
     public static final class Builder {
         private String city;
@@ -119,6 +141,8 @@ public class Weather {
         private String windType;
         private String feelingTemp;
         private String weatherUpdate;
+        private String maxTemp;
+        private String minTemp;
 
         public Builder() {
         }
@@ -165,6 +189,16 @@ public class Weather {
 
         public Builder weatherUpdate(String val) {
             weatherUpdate = val;
+            return this;
+        }
+
+        public Builder maxTemp(String val) {
+            maxTemp = val;
+            return this;
+        }
+
+        public Builder minTemp(String val) {
+            minTemp = val;
             return this;
         }
 

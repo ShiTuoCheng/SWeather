@@ -95,10 +95,15 @@ public class Utils {
         return "℃";
     }
 
-//    public static int compareWeatherBackground(int code){
-//
-//        if (code == )
-//    }
+    public static int compareWeatherBackground(int code){
+
+        if (code == 100){
+
+            return R.drawable.sun;
+        }
+
+        return 0;
+    }
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context
