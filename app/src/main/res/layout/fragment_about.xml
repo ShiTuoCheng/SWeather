@@ -7,53 +7,42 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="270dp"
         android:background="@color/colorPrimary">
 
         <ImageView
+            android:src="@mipmap/icon"
             android:id="@+id/avatarImgView"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
             />
 
         <TextView
+            android:id="@+id/appNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/avatarImgView"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="20dp"
             android:textAlignment="center"
             android:textSize="25sp"
             android:textStyle="bold"
             android:text="@string/app_name"
             />
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
-        <android.support.v7.widget.CardView
+        <TextView
+            android:id="@+id/versionTextView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            card_view:cardCornerRadius="3dp"
-            card_view:cardElevation="4dp"
-            card_view:cardUseCompatPadding="true"
-            android:foreground="?android:attr/selectableItemBackground">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </ScrollView>
-
-        </android.support.v7.widget.CardView>
-
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appNameTextView"
+            android:padding="@dimen/fab_margin"
+            android:textColor="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:text="V 1.0.0"/>
     </RelativeLayout>
 
+    <include layout="@layout/content_about"/>
 
 </FrameLayout>

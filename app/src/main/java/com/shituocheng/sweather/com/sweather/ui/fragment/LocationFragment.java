@@ -64,8 +64,6 @@ public class LocationFragment extends BaseFragment {
         uiHandler = new Handler(Looper.getMainLooper());
         initView(v);
 
-        Glide.with(getActivity().getApplicationContext()).load(R.drawable.sun_index).diskCacheStrategy(DiskCacheStrategy.NONE).into(imageView);
-
         if (!Utils.isNetworkAvailable(getActivity().getApplicationContext())){
 
             AlertDialog alertDialog = Utils.networkError(getActivity());
@@ -216,8 +214,8 @@ public class LocationFragment extends BaseFragment {
                                     String tempRange = weathers.get(i).getMinTemp() + Utils.tempUnit() + "~" + weathers.get(i).getMaxTemp() + Utils.tempUnit();
 
                                     tabLayout.getTabAt(i)
-                                            .setText(tempRange);
-//                                            .setIcon(Utils.compareWeatherBackground(Integer.valueOf(weathers.get(i).getWeatherCode())));
+                                            .setText(tempRange)
+                                            .setIcon(Utils.compareWeatherBackground(Integer.valueOf(weathers.get(i).getWeatherCode())));
                                 }
                             }
                         });
@@ -293,6 +291,8 @@ public class LocationFragment extends BaseFragment {
                         @Override
                         public void run() {
 
+                            //加载主屏天气大图标
+                            Glide.with(getActivity().getApplicationContext()).load(Utils.compareWeatherIndex(Integer.valueOf(weather.getWeatherCode()))).diskCacheStrategy(DiskCacheStrategy.NONE).into(imageView);
 
                             weatherStateImageView.setImageResource(Utils.compareWeatherBackground(Integer.valueOf(weather.getWeatherCode())));
                             tempTextView.setText(weather.getTemperature());
@@ -310,6 +310,7 @@ public class LocationFragment extends BaseFragment {
 
     }
 
+    //卡片动画
     private void cardViewAnimation(){
 
         cardViewLayout.setTranslationY(1000);
@@ -319,4 +320,14 @@ public class LocationFragment extends BaseFragment {
         imageView.animate().translationY(0).setDuration(300).setStartDelay(300).setInterpolator(INTERPOLATOR);
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        //回收handler防止内存泄露
+        if (uiHandler != null){
+
+            uiHandler.removeCallbacksAndMessages(null);
+        }
+    }
 }

@@ -2,16 +2,18 @@ package com.shituocheng.sweather.com.sweather.ui.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.shituocheng.sweather.com.sweather.R;
 import com.shituocheng.sweather.com.sweather.ui.base.BaseFragment;
+import com.shituocheng.sweather.com.sweather.utilis.Utils;
 
 public class WeatherTodayFragment extends BaseFragment {
 
+    private TextView pmTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -20,6 +22,14 @@ public class WeatherTodayFragment extends BaseFragment {
         View view = inflater.inflate(bindLayout(), container, false);
 
         initView(view);
+
+        if (Utils.isNetworkAvailable(getActivity().getApplicationContext())){
+
+            fetchData();
+        }else {
+
+            Utils.networkError(getActivity());
+        }
 
         return view;
     }
@@ -35,4 +45,8 @@ public class WeatherTodayFragment extends BaseFragment {
         return R.layout.fragment_weather_today;
     }
 
+    private void fetchData(){
+
+
+    }
 }

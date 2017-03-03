@@ -10,9 +10,12 @@ import android.view.MenuItem;
 
 import com.shituocheng.sweather.com.sweather.R;
 import com.shituocheng.sweather.com.sweather.adapter.MainViewPagerAdapter;
+import com.shituocheng.sweather.com.sweather.bean.Weather;
 import com.shituocheng.sweather.com.sweather.ui.base.BaseActivity;
 import com.shituocheng.sweather.com.sweather.ui.fragment.AboutFragment;
 import com.shituocheng.sweather.com.sweather.ui.fragment.LocationFragment;
+import com.shituocheng.sweather.com.sweather.ui.fragment.WeatherDetailFragment;
+import com.shituocheng.sweather.com.sweather.ui.fragment.WeatherTodayFragment;
 import com.shituocheng.sweather.com.sweather.utilis.Utils;
 
 import java.util.ArrayList;
@@ -83,10 +86,6 @@ public class MainActivity extends BaseActivity {
                 }
                 navigation.getMenu().getItem(position).setChecked(true);
                 prevMenuItem = navigation.getMenu().getItem(position);
-
-                if (position == 0){
-                    // TODO: 2017/2/23
-                }
             }
 
             @Override
@@ -102,7 +101,7 @@ public class MainActivity extends BaseActivity {
         MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new LocationFragment());
-        adapter.addFragment(new AboutFragment());
+        adapter.addFragment(new WeatherTodayFragment());
         adapter.addFragment(new AboutFragment());
         viewPager.setAdapter(adapter);
     }

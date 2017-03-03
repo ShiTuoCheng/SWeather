@@ -29,7 +29,6 @@ public class Utils {
         if (info != null && info.isConnected()) {
             if (info.getType() == ConnectivityManager.TYPE_MOBILE) {//当前使用2G/3G/4G网络
                 try {
-                    //Enumeration<NetworkInterface> en=NetworkInterface.getNetworkInterfaces();
                     for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
                         NetworkInterface intf = en.nextElement();
                         for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
@@ -43,12 +42,12 @@ public class Utils {
                     e.printStackTrace();
                 }
 
-            } else if (info.getType() == ConnectivityManager.TYPE_WIFI) {//当前使用无线网络
+            } else if (info.getType() == ConnectivityManager.TYPE_WIFI) {//当前使用无线网络\
+
                 WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-                String ipAddress = intIP2StringIP(wifiInfo.getIpAddress());//得到IPV4地址
 
-                return ipAddress;
+                return intIP2StringIP(wifiInfo.getIpAddress());//得到IPV4地址;
             }
         } else {
             //当前无网络连接,请在设置中打开网络
@@ -63,7 +62,7 @@ public class Utils {
      * @param ip
      * @return
      */
-    public static String intIP2StringIP(int ip) {
+    private static String intIP2StringIP(int ip) {
         return (ip & 0xFF) + "." +
                 ((ip >> 8) & 0xFF) + "." +
                 ((ip >> 16) & 0xFF) + "." +
@@ -76,7 +75,7 @@ public class Utils {
 
         final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
 
-        AlertDialog alertDialog = alertBuilder.setTitle("连接出错了哦")
+        return alertBuilder.setTitle("连接出错了哦")
                                               .setMessage("网络连接异常")
                                               .setPositiveButton("朕知道了", new DialogInterface.OnClickListener() {
                                                     @Override
@@ -85,9 +84,7 @@ public class Utils {
                                                             dialogInterface.dismiss();
                                                     }
                                                 })
-                                                .create();
-
-        return alertDialog;
+                                              .create();
     }
 
     public static String tempUnit(){
@@ -95,11 +92,53 @@ public class Utils {
         return "℃";
     }
 
+    public static int compareWeatherIndex(int code){
+
+        if (code == 100 || code == 101 || code == 102 || code == 103){
+
+            return R.drawable.sun_index;
+        }
+
+        return 0;
+
+    };
+
+    //加载天气小图标
     public static int compareWeatherBackground(int code){
 
         if (code == 100){
 
             return R.drawable.sun;
+        }else if (code == 101){
+
+            return R.drawable.cloudy;
+        }else if (code == 102){
+
+            return R.drawable.sun;
+        }else if (code == 103){
+
+            return R.drawable.cloudy;
+        }else if (code == 104){
+
+            return R.drawable.cloudy;
+        }else if (code == 200){
+
+            return R.drawable.cloudy;
+        }else if (code == 201){
+
+            return R.drawable.cloudy;
+        }else if (code == 202){
+
+            return R.drawable.cloudy;
+        }else if (code == 203){
+
+            return R.drawable.cloudy;
+        }else if (code == 204){
+
+            return R.drawable.cloudy;
+        }else if (code == 101){
+
+            return R.drawable.cloudy;
         }
 
         return 0;
