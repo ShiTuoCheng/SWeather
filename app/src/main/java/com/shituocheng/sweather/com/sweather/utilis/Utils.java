@@ -14,6 +14,8 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 
 /**
@@ -76,15 +78,14 @@ public class Utils {
         final AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
 
         return alertBuilder.setTitle("连接出错了哦")
-                                              .setMessage("网络连接异常")
-                                              .setPositiveButton("朕知道了", new DialogInterface.OnClickListener() {
+                           .setMessage("网络连接异常")
+                           .setPositiveButton("朕知道了", new DialogInterface.OnClickListener() {
                                                     @Override
                                                     public void onClick(DialogInterface dialogInterface, int i) {
-
-                                                            dialogInterface.dismiss();
+                                                        dialogInterface.dismiss();
                                                     }
                                                 })
-                                              .create();
+                           .create();
     }
 
     public static String tempUnit(){
@@ -96,12 +97,29 @@ public class Utils {
 
         if (code == 100 || code == 101 || code == 102 || code == 103){
 
-            return R.drawable.sun_index;
+            if (getCurrentTime()){
+
+                return R.drawable.moon_index;
+            }else {
+
+                return R.drawable.sun_index;
+            }
         }
 
         return 0;
 
     };
+
+    private static boolean getCurrentTime(){
+        SimpleDateFormat sdf = new SimpleDateFormat("HH");
+        String hour= sdf.format(new Date());
+        int k  = Integer.parseInt(hour)  ;
+        if ((k>=0 && k<6) ||(k >=18 && k<24)){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //加载天气小图标
     public static int compareWeatherBackground(int code){
