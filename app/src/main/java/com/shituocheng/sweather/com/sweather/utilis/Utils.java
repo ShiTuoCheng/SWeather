@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.util.Log;
 
 import com.shituocheng.sweather.com.sweather.R;
 
@@ -44,7 +45,7 @@ public class Utils {
                     e.printStackTrace();
                 }
 
-            } else if (info.getType() == ConnectivityManager.TYPE_WIFI) {//当前使用无线网络\
+            } else if (info.getType() == ConnectivityManager.TYPE_WIFI) {//当前使用无线网络
 
                 WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 WifiInfo wifiInfo = wifiManager.getConnectionInfo();
@@ -95,20 +96,22 @@ public class Utils {
 
     public static int compareWeatherIndex(int code){
 
-        if (code == 100 || code == 101 || code == 102 || code == 103){
+//        if (code == 100 || code == 101 || code == 102 || code == 103){
+//
+//
+//        }
 
-            if (getCurrentTime()){
+        if (getCurrentTime()){
 
-                return R.drawable.moon_index;
-            }else {
+            Log.d("time", "night");
+            return R.drawable.moon_index;
+        }else {
 
-                return R.drawable.sun_index;
-            }
+            Log.d("time", "day");
+            return R.drawable.sun_index;
         }
 
-        return 0;
-
-    };
+    }
 
     private static boolean getCurrentTime(){
         SimpleDateFormat sdf = new SimpleDateFormat("HH");
@@ -154,9 +157,75 @@ public class Utils {
         }else if (code == 204){
 
             return R.drawable.cloudy;
-        }else if (code == 101){
+        }else if (code == 205){
 
-            return R.drawable.cloudy;
+            return R.drawable.cold;
+        }else if (code == 206){
+
+            return R.drawable.cold;
+        }else if (code == 207){
+
+            return R.drawable.cold;
+        }else if (code == 208){
+
+            return R.drawable.cold;
+        }else if (code == 209){
+
+            return R.drawable.cold;
+        }else if (code == 210){
+
+            return R.drawable.cold;
+        }else if (code == 211){
+
+            return R.drawable.cold;
+        }else if (code == 212){
+
+            return R.drawable.cold;
+        }else if (code == 213){
+
+            return R.drawable.cold;
+        }else if (code == 300){
+
+            return R.drawable.cloudyrain;
+        }else if (code == 301){
+
+            return R.drawable.bigrain;
+        }else if (code == 302){
+
+            return R.drawable.thunderrain;
+        }else if (code == 303){
+
+            return R.drawable.thunderrain;
+        }else if (code == 304){
+
+            return R.drawable.rainandsnow;
+        }else if (code == 305){
+
+            return R.drawable.smallrain;
+        }else if (code == 306){
+
+            return R.drawable.middlerain;
+        }else if (code == 307){
+
+            return R.drawable.bigrain;
+        }else if (code == 308){
+
+            return R.drawable.giantrain;
+        }else if (code == 309){
+
+            return R.drawable.bigrain;
+        }else if (code == 310){
+
+            return R.drawable.bigrain;
+        }else if (code == 311){
+
+            return R.drawable.bigrain;
+        }else if (code == 312){
+
+            return R.drawable.giantrain;
+        }else if (code == 313){
+
+            return R.drawable.rainandsnow;
         }
 
         return 0;

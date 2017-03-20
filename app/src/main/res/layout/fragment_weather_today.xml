@@ -6,7 +6,8 @@
     tools:context="com.shituocheng.sweather.com.sweather.ui.fragment.WeatherTodayFragment">
 
     <TextView
-        android:text="风力："
+        android:text="N/A"
+        android:id="@+id/weatherStateTextView"
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
