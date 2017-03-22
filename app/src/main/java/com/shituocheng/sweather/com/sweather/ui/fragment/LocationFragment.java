@@ -47,6 +47,8 @@ public class LocationFragment extends BaseFragment {
 
     private List<Weather> weathers = new ArrayList<>();
 
+    private List<Integer> pageIndexList = new ArrayList<>();
+
     //ui
     private TextView tempTextView;
     private TextView cityTextView;
@@ -89,11 +91,14 @@ public class LocationFragment extends BaseFragment {
         cityTextView = (TextView)view.findViewById(R.id.cityTextView);
         weatherStateImageView = (ImageView)view.findViewById(R.id.weatherStateImageView);
 
-        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getChildFragmentManager());
+        pageIndexList.add(1);
+        pageIndexList.add(2);
+
+        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getChildFragmentManager(), pageIndexList);
 
         mainViewPagerAdapter.addFragment(new WeatherTodayFragment());
-        mainViewPagerAdapter.addFragment(new AboutFragment());
-        mainViewPagerAdapter.addFragment(new AboutFragment());
+        mainViewPagerAdapter.addFragment(WeatherDetailFragment.newInstance(1));
+        mainViewPagerAdapter.addFragment(WeatherDetailFragment.newInstance(2));
 
         innerViewPager.setAdapter(mainViewPagerAdapter);
 

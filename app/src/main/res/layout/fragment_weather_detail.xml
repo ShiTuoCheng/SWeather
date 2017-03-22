@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,5 +7,25 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:id="@+id/date_textView"
+        android:textSize="20sp"
+        android:padding="@dimen/fab_margin"
         android:layout_height="wrap_content" />
-</FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_below="@id/date_textView"
+        android:id="@+id/minTemp_textView"
+        android:textSize="20sp"
+        android:padding="@dimen/fab_margin"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:padding="@dimen/fab_margin"
+        android:id="@+id/maxTemp_textView"
+        android:layout_below="@id/minTemp_textView"
+        />
+</RelativeLayout>
