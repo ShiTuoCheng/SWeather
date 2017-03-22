@@ -13,7 +13,7 @@ import com.shituocheng.sweather.com.sweather.utilis.Utils;
 
 public class WeatherTodayFragment extends BaseFragment {
 
-    private TextView pmTextView;
+    private TextView stateTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +37,7 @@ public class WeatherTodayFragment extends BaseFragment {
     @Override
     public void initView(View view) {
 
-
+        stateTextView = (TextView)view.findViewById(R.id.weatherStateTextView);
     }
 
     @Override

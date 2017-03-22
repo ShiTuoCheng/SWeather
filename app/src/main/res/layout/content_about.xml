@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/cardViewLayout"
+            android:layout_width="match_parent"
+            android:layout_height="800dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/authorCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="3dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/authorImageView"
+                        android:layout_margin="@dimen/fab_margin"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp" />
+
+                    <TextView
+                        android:id="@+id/developerTitleTextView"
+                        android:padding="@dimen/fab_margin"
+                        android:text="APP开发: "
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/authorImageView"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/authorImageView"
+                        android:layout_below="@id/developerTitleTextView"
+                        android:padding="@dimen/fab_margin"
+                        android:text="stc3033"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/designerCardView"
+                android:layout_below="@id/authorCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="3dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/designerImageView"
+                        android:layout_margin="@dimen/fab_margin"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp" />
+
+                    <TextView
+                        android:id="@+id/designerTitleTextView"
+                        android:padding="@dimen/fab_margin"
+                        android:text="APP图标及UI设计: "
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/designerImageView"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/designerImageView"
+                        android:layout_below="@id/designerTitleTextView"
+                        android:padding="@dimen/fab_margin"
+                        android:text="YS2L"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_below="@id/designerCardView"
+                android:id="@+id/openSourceCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="3dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/openSourceTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="开源许可"
+                        android:textStyle="bold"
+                        android:padding="@dimen/fab_margin"
+                        />
+
+                    <TextView
+                        android:id="@+id/glideTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/openSourceTitle"
+                        android:padding="@dimen/fab_margin"
+                        android:text="Glide: An image loading and caching library for Android focused on smooth scrolling "/>
+
+                    <TextView
+                        android:id="@+id/okhttpTextView"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/fab_margin"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/glideTextView"
+                        android:text="OKHttp3: An HTTP and HTTP/2 client for Android and Java applications"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardUseCompatPadding="true"
+                android:layout_below="@id/openSourceCardView"
+                card_view:cardCornerRadius="3dp"
+                android:elevation="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageView
+                        android:id="@+id/githubImageView"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="fitXY"
+                        android:padding="@dimen/fab_margin"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@id/githubImageView"
+                        android:padding="@dimen/fab_margin"
+                        android:text="Github"/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

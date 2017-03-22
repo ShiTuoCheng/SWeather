@@ -96,32 +96,31 @@ public class Utils {
 
     public static int compareWeatherIndex(int code){
 
-//        if (code == 100 || code == 101 || code == 102 || code == 103){
-//
-//
-//        }
+        if (code == 100 || code == 200 || code == 201 || code == 202 || code == 203 || code == 204 ) {
 
-        if (getCurrentTime()){
+            if (getCurrentTime()){
 
-            Log.d("time", "night");
-            return R.drawable.moon_index;
-        }else {
+                return R.drawable.moon_index;
+            }else {
 
-            Log.d("time", "day");
-            return R.drawable.sun_index;
+                return R.drawable.sun_index;
+            }
+        }else if (code == 103 || code == 101 || code == 102  || code == 205){
+
+            return R.drawable.cloud;
+        }else if (code == 104 || code == 206 || code == 207 || code == 208 || code == 209 || code == 210 || code == 211 || code == 212 || code == 213 || code == 300 || code == 301 || code == 302 || code == 303 || code == 304 || code == 305 || code == 306 || code == 307 || code == 308 || code == 309 || code == 310 || code == 311 || code == 312 || code == 313 || code == 400 || code == 401 || code == 402 || code == 403 || code == 404 || code == 405 || code == 406 || code == 407 || code == 500 || code == 501 || code == 502 || code == 503 || code == 504 || code == 507 || code == 508 || code == 900 || code == 901){
+
+            return R.drawable.dark_cloud;
         }
 
+        return 0;
     }
 
     private static boolean getCurrentTime(){
         SimpleDateFormat sdf = new SimpleDateFormat("HH");
         String hour= sdf.format(new Date());
         int k  = Integer.parseInt(hour)  ;
-        if ((k>=0 && k<6) ||(k >=18 && k<24)){
-            return true;
-        } else {
-            return false;
-        }
+        return (k >= 0 && k < 6) || (k >= 18 && k < 24);
     }
 
     //加载天气小图标
@@ -159,31 +158,31 @@ public class Utils {
             return R.drawable.cloudy;
         }else if (code == 205){
 
-            return R.drawable.cold;
+            return R.drawable.wind;
         }else if (code == 206){
 
-            return R.drawable.cold;
+            return R.drawable.wind;
         }else if (code == 207){
 
-            return R.drawable.cold;
+            return R.drawable.wind;
         }else if (code == 208){
 
-            return R.drawable.cold;
+            return R.drawable.wind;
         }else if (code == 209){
 
-            return R.drawable.cold;
+            return R.drawable.wind;
         }else if (code == 210){
 
-            return R.drawable.cold;
+            return R.drawable.wind;
         }else if (code == 211){
 
-            return R.drawable.cold;
+            return R.drawable.wind;
         }else if (code == 212){
 
-            return R.drawable.cold;
+            return R.drawable.wind;
         }else if (code == 213){
 
-            return R.drawable.cold;
+            return R.drawable.wind;
         }else if (code == 300){
 
             return R.drawable.cloudyrain;
